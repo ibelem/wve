@@ -11,16 +11,48 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:webnizer.ui"
+		"onCommand:webnizer.ui",
+		"onCommand:webnizer.build"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "webnizer.ui",
-				"title": "Run Webnizer"
+				"title": "Webnizer - Hello"
+			},
+			{
+				"command": "webnizer.build",
+				"title": "Webnizer - Build your project",
+				"icon": {
+					"light": "./src/media/favicon.png",
+					"dark": "./src/media/favicon.png"
+				}
 			}
-		]
+		],
+		"keybindings": [{
+			"command": "webnizer.build",
+			"key": "ctrl+f1",
+			"mac": "cmd+f1",
+			"when": "editorTextFocus"
+		}],
+		"menus": {
+			"editor/title": [{
+					"when": "resourceLangId == typescript || cpp || c || rust",
+					"command": "webnizer.build",
+					"group": "navigation"
+			}],
+			"editor/context": [{
+				"when": "resourceLangId == typescript || cpp || c || rust",
+				"command": "webnizer.build",
+				"group": "navigation"
+			}],
+			"commandPalette": [{
+				"when": "resourceLangId == typescript || cpp || c || rust",
+				"command": "webnizer.build",
+				"group": "navigation"
+			}]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
