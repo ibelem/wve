@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import { ProgressLocation } from 'vscode';
 
+
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -17,61 +19,73 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('webnizer.ui', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
+
 		vscode.window.showInformationMessage('Webnizer - Hello!');
+
+		
 	});
 
 	let disposable2 = vscode.commands.registerCommand('webnizer.build', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Webnizer - Starting to build your project to Wasm');
-		vscode.window.showWarningMessage('Webnizer - Warning');
-		vscode.window.showErrorMessage('Webnizer - Error');
+
+		const outputChannel = vscode.window.createOutputChannel(`Webnier`);
+		outputChannel.appendLine('Webnizer Build Log');
+		outputChannel.show(true);
+
+		setTimeout(() => {
+				outputChannel.appendLine('Test1');
+				outputChannel.appendLine('Test2');
+				outputChannel.appendLine('Test3');
+				vscode.window.showWarningMessage('Webnizer - Debug Warning');
+				vscode.window.showErrorMessage('Webnizer - Debug Error');
+		}, 3000);
+
+		vscode.window.withProgress({
+			location: ProgressLocation.Window,
+			title: "Webnizer building",
+			cancellable: true
+		}, (progress, token) => {
+			token.onCancellationRequested(() => {
+				console.log("User canceled the long running operation");
+			});
+		
+			setTimeout(() => {
+				progress.report({ increment: 0, message: "0% █ Starting ..." });
+				vscode.window.showInformationMessage('Webnizer - Starting to build your project to Wasm');
+				progress.report({ increment: 10, message: "10% █ Still going..." });
+			}, 1000);
+		
+			setTimeout(() => {
+				progress.report({ increment: 20, message: "20% ██ Still going..." });
+			}, 2000);
+		
+			setTimeout(() => {
+				progress.report({ increment: 50, message: "50% █████ Still going even more..." });
+			}, 10000);
+		
+			setTimeout(() => {
+				progress.report({ increment: 80, message: "80% █████████ Almost there..." });
+			}, 15000);
+		
+			setTimeout(() => {
+				progress.report({ increment: 100, message: "100% ███████████ Build completed." });
+			}, 18000);
+		
+			const p = new Promise<void>(resolve => {
+				setTimeout(() => {
+					resolve();
+						vscode.window.showInformationMessage('Webnizer - Build completed.')
+				}, 20000);
+			});
+		
+			return p;
+		});
+	
 	});
 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(disposable2);
-
-	const outputChannel = vscode.window.createOutputChannel(`Webnier`);
-	outputChannel.appendLine('Webnizer Build Log');
-	outputChannel.show(true);
-
-	setTimeout(() => {
-			outputChannel.appendLine('Test1');
-			outputChannel.appendLine('Test2');
-			outputChannel.appendLine('Test3');
-	}, 5000);
-
-	vscode.window.withProgress({
-		location: ProgressLocation.Notification,
-		title: "I am long running!",
-		cancellable: true
-	}, (progress, token) => {
-		token.onCancellationRequested(() => {
-			console.log("User canceled the long running operation");
-		});
-
-		progress.report({ increment: 0 });
-
-		setTimeout(() => {
-			progress.report({ increment: 10, message: "I am long running! - still going..." });
-		}, 1000);
-
-		setTimeout(() => {
-			progress.report({ increment: 40, message: "I am long running! - still going even more..." });
-		}, 2000);
-
-		setTimeout(() => {
-			progress.report({ increment: 50, message: "I am long running! - almost there..." });
-		}, 3000);
-
-		const p = new Promise<void>(resolve => {
-			setTimeout(() => {
-				resolve();
-			}, 5000);
-		});
-
-		return p;
-	});
 
 }
 
