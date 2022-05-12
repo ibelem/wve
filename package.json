@@ -41,21 +41,21 @@
     "menus": {
       "editor/title": [
         {
-          "when": "resourceLangId == typescript || cpp || c || rust",
+          "when": "resourceLangId ==  typescript || resourceLangId ==  cpp || resourceLangId ==  c || resourceLangId == rust",
           "command": "webnizer.build",
           "group": "navigation"
         }
       ],
       "editor/context": [
         {
-          "when": "resourceLangId == typescript || cpp || c || rust",
+          "when": "resourceLangId ==  typescript || resourceLangId ==  cpp || resourceLangId ==  c || resourceLangId == rust",
           "command": "webnizer.build",
           "group": "navigation"
         }
       ],
       "commandPalette": [
         {
-          "when": "resourceLangId == typescript || cpp || c || rust",
+          "when": "resourceLangId ==  typescript || resourceLangId ==  cpp || resourceLangId ==  c || resourceLangId == rust",
           "command": "webnizer.build",
           "group": "navigation"
         }

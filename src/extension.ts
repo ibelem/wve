@@ -29,17 +29,31 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 
-		const outputChannel = vscode.window.createOutputChannel(`Webnier`);
-		outputChannel.appendLine('Webnizer Build Log');
+		const date = new Date();
+		const localedate = date.toLocaleTimeString();
+
+		const outputChannel = vscode.window.createOutputChannel(`Webnier `);
 		outputChannel.show(true);
 
+
+		outputChannel.appendLine(`[${localedate}][Auto convert][info] Configure is ready, starting auto conversion...`);
+		outputChannel.appendLine(`[${localedate}][Auto convert][info] Fixing issues based on recipes...`);
+		outputChannel.appendLine(`[${localedate}][Build][info] Building...`);
+
 		setTimeout(() => {
-				outputChannel.appendLine('Test1');
-				outputChannel.appendLine('Test2');
-				outputChannel.appendLine('Test3');
-				vscode.window.showWarningMessage('Webnizer - Debug Warning');
-				vscode.window.showErrorMessage('Webnizer - Debug Error');
-		}, 3000);
+			outputChannel.appendLine(`[${localedate}][Build][warning] Build Warning ...`);
+			vscode.window.showWarningMessage('Webnizer - Build Warning');
+		}, 5000);
+
+		setTimeout(() => {
+			outputChannel.appendLine(`[${localedate}][Analyze][info] Analyzing the build errors...`);
+		}, 8000);
+
+		setTimeout(() => {
+			outputChannel.appendLine(`[${localedate}][Analyze][error] Unable to analyze...`);
+			vscode.window.showErrorMessage('Webnizer - Build Error');
+		}, 15000);
+
 
 		vscode.window.withProgress({
 			location: ProgressLocation.Window,
@@ -58,25 +72,25 @@ export function activate(context: vscode.ExtensionContext) {
 		
 			setTimeout(() => {
 				progress.report({ increment: 20, message: "20% ██ Still going..." });
-			}, 2000);
+			}, 5000);
 		
 			setTimeout(() => {
 				progress.report({ increment: 50, message: "50% █████ Still going even more..." });
-			}, 10000);
-		
-			setTimeout(() => {
-				progress.report({ increment: 80, message: "80% █████████ Almost there..." });
 			}, 15000);
 		
 			setTimeout(() => {
+				progress.report({ increment: 80, message: "80% █████████ Almost there..." });
+			}, 20000);
+		
+			setTimeout(() => {
 				progress.report({ increment: 100, message: "100% ███████████ Build completed." });
-			}, 18000);
+			}, 22000);
 		
 			const p = new Promise<void>(resolve => {
 				setTimeout(() => {
 					resolve();
 						vscode.window.showInformationMessage('Webnizer - Build completed.')
-				}, 20000);
+				}, 22000);
 			});
 		
 			return p;
