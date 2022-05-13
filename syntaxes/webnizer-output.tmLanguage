@@ -22,13 +22,6 @@
                 <key>name</key>
                 <string>string.quoted</string>
             </dict>
-            <!-- <dict>
-                brackets
-                <key>match</key>
-                <string><(.*?)></string>
-                <key>name</key>
-                <string>string.quoted</string>
-            </dict> -->
             <dict>
                 <!-- GUID -->
                 <key>match</key>
@@ -143,6 +136,12 @@
                 <key>name</key>
                 <string>comment.line</string>
             </dict>
+            <!-- <dict>
+                <key>match</key>
+                <string>\b(?i:(Build|Analyze|Auto convert))(\:|\b)</string>
+                <key>name</key>
+                <string>keyword.operator</string>
+            </dict> -->
         </array>
     </dict>
 </plist>
