@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { ProgressLocation } from 'vscode';
+// import * as hw from 'ag-simple-hello-world-example';
 
 
 
@@ -20,8 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 
+		// hw.printMsg();
 		vscode.window.showInformationMessage('Webnizer - Hello!');
-
 		
 	});
 
@@ -32,16 +33,17 @@ export function activate(context: vscode.ExtensionContext) {
 		const date = new Date();
 		const localedate = date.toLocaleTimeString();
 
-		const outputChannel = vscode.window.createOutputChannel(`Webnier `);
+		const outputChannel = vscode.window.createOutputChannel(`Webnier`);
 		outputChannel.show(true);
 
 
 		outputChannel.appendLine(`[${localedate}][Auto convert][info] Configure is ready, starting auto conversion...`);
 		outputChannel.appendLine(`[${localedate}][Auto convert][info] Fixing issues based on recipes...`);
 		outputChannel.appendLine(`[${localedate}][Build][info] Building...`);
+		outputChannel.appendLine(`[${localedate}][Build][info] Test URL https://www.wpe.com/ "hello" ...`);
 
 		setTimeout(() => {
-			outputChannel.appendLine(`[${localedate}][Build][warning] Build Warning ...`);
+			outputChannel.appendLine(`[${localedate}][Build][warn] Build Warning ...`);
 			vscode.window.showWarningMessage('Webnizer - Build Warning');
 		}, 5000);
 
@@ -53,6 +55,10 @@ export function activate(context: vscode.ExtensionContext) {
 			outputChannel.appendLine(`[${localedate}][Analyze][error] Unable to analyze...`);
 			vscode.window.showErrorMessage('Webnizer - Build Error');
 		}, 15000);
+
+		setTimeout(() => {
+			outputChannel.appendLine(`[${localedate}][Build][info] Sucessful, build completed...`);
+		}, 22000);
 
 
 		vscode.window.withProgress({
