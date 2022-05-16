@@ -12,7 +12,8 @@
   ],
   "activationEvents": [
     "onCommand:webnizer.ui",
-    "onCommand:webnizer.build"
+    "onCommand:webnizer.build",
+    "onLanguage:cpp"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -67,6 +68,17 @@
         "mimetypes": [
           "text/x-code-output"
         ]
+      },
+      {
+        "id": "typescript",
+        "extensions": [
+          ".ts"
+        ],
+        "aliases": [
+          "ts",
+          "TypeScript"
+        ],
+        "configuration": "./declarative-language-configuration.json"
       }
     ],
     "grammars": [
