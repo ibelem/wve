@@ -50,13 +50,13 @@
                 <key>name</key>
                 <string>constant.numeric</string>
             </dict>
-            <dict>
-                <!-- Date (YY)YY/DD/MM -->
+            <!-- <dict>
+                Date (YY)YY/DD/MM
                 <key>match</key>
                 <string>\b((19|20)?[0-9]{2}[/|\-|\.| ](((0|1)?[0-9][1-2]?)|(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sept(ember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?))[/|\-|\.| ]([0-2]?[0-9]|[3][0-1]))\b</string>
                 <key>name</key>
                 <string>constant.numeric</string>
-            </dict>
+            </dict> -->
             <dict>
                 <!-- Date DD/MM/(YY)YY -->
                 <key>match</key>
@@ -64,6 +64,14 @@
                 <key>name</key>
                 <string>constant.numeric</string>
             </dict>
+            <dict>
+                <!-- Date [2022-05-19T05:39:14.947Z] -->
+                <key>match</key>
+                <string>\b([0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}\S[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})\.[0-9]{0,3}\S\b</string>
+                <key>name</key>
+                <string>constant.numeric</string>
+            </dict>
+            
             <dict>
                 <!-- Time HH:MM(:SS)? AM? timezone? -->
                 <key>match</key>
@@ -94,19 +102,19 @@
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(warning|warn|Down|Error|Failure|Fail|Fatal|false))(\:|\b)</string>
+                <string>\b(?i:(warning|warn|Down|Error|Failure|Fail|Fatal|false|send_error|fatal_error|author_warning))(\:|\b)</string>
                 <key>name</key>
                 <string>invalid.illegal</string>
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(hint|info|information|true|log))(\:|\b)</string>
+                <string>\b(?i:(hint|info|information|notice|true|log|status))(\:|\b)</string>
                 <key>name</key>
                 <string>keyword</string>
             </dict>
             <dict>
                 <key>match</key>
-                <string>\b(?i:(test|debug|null|undefined|NaN))(\:|\b)</string>
+                <string>\b(?i:(test|debug|trace|null|undefined|NaN))(\:|\b)</string>
                 <key>name</key>
                 <string>invalid.deprecated</string>
             </dict>
@@ -136,12 +144,12 @@
                 <key>name</key>
                 <string>comment.line</string>
             </dict>
-            <!-- <dict>
+            <dict>
                 <key>match</key>
-                <string>\b(?i:(Build|Analyze|Auto convert))(\:|\b)</string>
+                <string>\b(?i:(build|analyze|auto convert))(\:|\b)</string>
                 <key>name</key>
                 <string>keyword.operator</string>
-            </dict> -->
+            </dict>
         </array>
     </dict>
 </plist>

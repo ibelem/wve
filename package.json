@@ -13,10 +13,28 @@
   "activationEvents": [
     "onCommand:webnizer.ui",
     "onCommand:webnizer.build",
-    "onLanguage:cpp"
+    "onLanguage:cpp",
+    "onView:fileExplorer"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "webnizer",
+          "title": "Webnizer Extension",
+          "icon": "./resources/dark/folder.svg"
+        }
+      ]
+    },
+    "views": {
+      "webnizer": [
+        {
+          "id": "file-explorer",
+          "name": "Webnizer Explorer"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "webnizer.ui",
@@ -26,8 +44,8 @@
         "command": "webnizer.build",
         "title": "Webnizer - Build your project",
         "icon": {
-          "light": "./src/media/favicon.png",
-          "dark": "./src/media/favicon.png"
+          "light": "resources/dark/favicon.png",
+          "dark": "resources/dark/favicon.png"
         }
       }
     ],
@@ -98,19 +116,24 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.67.0",
     "@types/glob": "^7.2.0",
+    "@types/mkdirp": "^1.0.2",
     "@types/mocha": "^9.1.1",
     "@types/node": "14.x",
+    "@types/rimraf": "^3.0.2",
+    "@types/vscode": "^1.67.0",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
+    "@vscode/test-electron": "^2.1.3",
     "eslint": "^8.14.0",
     "glob": "^8.0.1",
     "mocha": "^10.0.0",
-    "typescript": "^4.6.4",
-    "@vscode/test-electron": "^2.1.3"
+    "typescript": "^4.6.4"
   },
   "dependencies": {
-    "ag-simple-hello-world-example": "^1.0.4"
+    "ag-simple-hello-world-example": "^1.0.4",
+    "axios": "^0.27.2",
+    "mkdirp": "^1.0.4",
+    "rimraf": "^3.0.2"
   }
 }

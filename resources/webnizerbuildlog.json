@@ -1,0 +1,89 @@
+[
+  {
+    "timestamp": "2022-05-19T05:39:07.947Z",
+    "type": "notice",
+    "phase": "auto convert",
+    "msg": "Configure is ready, starting auto conversion...",
+    "note_type": "fatal_error, send_error, warning, author_warning, deprecation, notice, status, verbose, debug, trace",
+    "note_phase": "auto convert, build, analyze"
+  },
+  {
+    "timestamp": "2022-05-19T05:39:08.947Z",
+    "type": "notice",
+    "phase": "auto convert",
+    "msg": "Fixing issues based on recipes..."
+  },
+  {
+    "timestamp": "2022-05-19T05:39:09.947Z",
+    "type": "notice",
+    "phase": "build",
+    "msg": "Building..."
+  },
+  {
+    "timestamp": "2022-05-19T05:39:10.947Z",
+    "type": "notice",
+    "phase": "build",
+    "msg": "Building in progress https://www.wpe.com/"
+  },
+  {
+    "timestamp": "2022-05-19T05:39:11.947Z",
+    "type": "warning",
+    "phase": "build",
+    "msg": "Getting warning messages..."
+  },
+  {
+    "timestamp": "2022-05-19T05:39:12.947Z",
+    "type": "send_error",
+    "phase": "build",
+    "msg": "Getting error messages...",
+    "quickfix": [
+      {
+        "file": "/src/hi.cpp",
+        "line": 49,
+        "column": 7,
+        "length": 6,
+        "replacewith": "main()"
+      }
+    ]
+  },
+  {
+    "timestamp": "2022-05-19T05:39:14.947Z",
+    "type": "fatal_error",
+    "phase": "build",
+    "msg": "Getting fatal error messages...",
+    "quickfix": [
+      {
+        "file": "/src/hello.cpp",
+        "line": 49,
+        "column": 7,
+        "length": 6,
+        "replacewith": "main()"
+      },
+      {
+        "file": "/src/test.cpp",
+        "line": 10,
+        "column": 8,
+        "length": 24,
+        "replacewith": "const string &word : msg"
+      }
+    ]
+  },
+  {
+    "timestamp": "2022-05-19T05:39:16.947Z",
+    "type": "notice",
+    "phase": "analyze",
+    "msg": " Analyzing the build errors..."
+  },
+  {
+    "timestamp": "2022-05-19T05:39:18.947Z",
+    "type": "send_error",
+    "phase": "analyze",
+    "msg": "Unable to analyze..."
+  },
+  {
+    "timestamp": "2022-05-19T05:39:20.947Z",
+    "type": "notice",
+    "phase": "build",
+    "msg": "Successful, build completed..."
+  }
+]

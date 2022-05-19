@@ -3,6 +3,8 @@
 import * as vscode from "vscode";
 import { ProgressLocation } from "vscode";
 import { subscribeToDocumentChanges, WEBNIZER_MENTION } from "./diagnostics";
+import * as fs from "fs";
+import * as path from "path";
 // import * as hw from 'ag-simple-hello-world-example';
 
 const COMMAND = "code-actions-sample.command";
@@ -23,15 +25,6 @@ export function activate(context: vscode.ExtensionContext) {
 
     // hw.printMsg();
     vscode.window.showInformationMessage("Webnizer - Hello!");
-
-    const items: vscode.QuickPickItem[] = [
-      {
-        label: "$(git-merge) Merge Branch",
-        description: "$(git-commit) 1 commit",
-        detail: "$(diff-added) 3 $(diff-modified) 2",
-      },
-    ];
-    vscode.window.showQuickPick(items);
   });
 
   let disposable2 = vscode.commands.registerCommand("webnizer.build", () => {
@@ -43,54 +36,22 @@ export function activate(context: vscode.ExtensionContext) {
 
     const outputChannel = vscode.window.createOutputChannel(`Webnier`);
     outputChannel.show(true);
-
     outputChannel.appendLine(`Webnier Building`);
     outputChannel.appendLine(
       `--------------------------------------------------------------------------------------`
     );
 
-    outputChannel.appendLine(
-      `[${localedate}][Auto convert][info] Configure is ready, starting auto conversion...`
-    );
-    outputChannel.appendLine(
-      `[${localedate}][Auto convert][info] Fixing issues based on recipes...`
-    );
-    outputChannel.appendLine(
-      `--------------------------------------------------------------------------------------`
-    );
-    outputChannel.appendLine(`[${localedate}][Build][info] Building...`);
-    outputChannel.appendLine(
-      `[${localedate}][Build][info] Test URL https://www.wpe.com/ "hello" npm run dev ...`
-    );
-
-    setTimeout(() => {
-      outputChannel.appendLine(
-        `[${localedate}][Build][warn] Build Warning ...`
-      );
-      vscode.window.showWarningMessage("Webnizer - Build Warning");
-    }, 5000);
-
-    setTimeout(() => {
-      outputChannel.appendLine(
-        `--------------------------------------------------------------------------------------`
-      );
-      outputChannel.appendLine(
-        `[${localedate}][Analyze][info] Analyzing the build errors...`
-      );
-    }, 8000);
-
-    setTimeout(() => {
-      outputChannel.appendLine(
-        `[${localedate}][Analyze][error] Unable to analyze...`
-      );
-      vscode.window.showErrorMessage("Webnizer - Build Error");
-    }, 15000);
-
-    setTimeout(() => {
-      outputChannel.appendLine(
-        `[${localedate}][Build][info] Successful, build completed...`
-      );
-    }, 22000);
+    const json  = fs.readFileSync(path.resolve(__dirname, "../resources/webnizerbuildlog.json"), "utf8");
+    const obj = JSON.parse(json);
+    for(let i of obj) {
+     outputChannel.appendLine(`[${i.timestamp}] [${i.type}] [${i.phase}] ${i.msg}`)
+      if(i.quickfix) {
+        for(let j of i.quickfix) {
+          outputChannel.appendLine(`                           [File ${j.file}] [Ln ${j.line}, Col ${j.column}] [Length ${j.length}]`);
+          outputChannel.appendLine(`                           [Quickfix] Replace with: ${j.replacewith}`);
+        }
+      }
+    }
 
     vscode.window.withProgress(
       {
@@ -178,6 +139,12 @@ export function activate(context: vscode.ExtensionContext) {
       )
     )
   );
+
+  const rootPath =
+    vscode.workspace.workspaceFolders &&
+    vscode.workspace.workspaceFolders.length > 0
+      ? vscode.workspace.workspaceFolders[0].uri.fsPath
+      : undefined;
 }
 
 // this method is called when your extension is deactivated
