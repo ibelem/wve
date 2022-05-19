@@ -96,7 +96,7 @@
           "ts",
           "TypeScript"
         ],
-        "configuration": "./declarative-language-configuration.json"
+        "configuration": "./resources/declarative-language-configuration.json"
       }
     ],
     "grammars": [
